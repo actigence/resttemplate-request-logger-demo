@@ -32,14 +32,6 @@ public class App {
     }
 
     @Bean
-    public RestTemplate restTemplate() {
-        ClientHttpRequestFactory factory = new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory());
-        RestTemplate restTemplate = new RestTemplate(factory);
-        restTemplate.setInterceptors(singletonList(new OutboundRequestTrackingInterceptor()));
-        return restTemplate;
-    }
-
-    @Bean
     public CommandLineRunner run(RestTemplate restTemplate) {
         return args -> {
             Quote quote = restTemplate.getForObject(
